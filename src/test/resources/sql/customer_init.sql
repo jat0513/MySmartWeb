@@ -1,0 +1,2 @@
+INSERT INTO customer(`name`,contact,telephone,email,remark) VALUES ('smart','mvc','13888888888','smart@smart.com','test');
+INSERT INTO customer(`name`,contact,telephone,email,remark) VALUES ('smart2','mvc2','13888888888','smart2@smart.com','test2');
