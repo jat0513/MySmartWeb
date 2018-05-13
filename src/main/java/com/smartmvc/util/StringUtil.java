@@ -12,10 +12,11 @@ public class StringUtil {
     }
 
     public static boolean isNotEmpty(String str) {
-        if (str != null) {
-            str = str.trim();
-        }
-        return StringUtils.isEmpty(str);
+        return !StringUtil.isEmpty(str);
+    }
+
+    public static String[] splitString(String str, String separatorChar) {
+        return StringUtils.split(str, separatorChar);
     }
 
 }

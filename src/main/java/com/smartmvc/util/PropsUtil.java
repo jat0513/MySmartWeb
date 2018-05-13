@@ -40,7 +40,7 @@ public class PropsUtil {
     }
 
     public static String getString(Properties props, String key) {
-        return getString(props, key);
+        return getString(props, key, "");
     }
 
     public static String getString(Properties props, String key, String defaultValue) {
@@ -52,7 +52,7 @@ public class PropsUtil {
     }
 
     public static int getInt(Properties props, String key) {
-        return getInt(props, key);
+        return getInt(props, key, 0);
     }
 
     public static int getInt(Properties props, String key, int defaultValue) {
@@ -64,7 +64,7 @@ public class PropsUtil {
     }
 
     public static boolean getBoolean(Properties props, String key) {
-        return getBoolean(props, key);
+        return getBoolean(props, key, false);
     }
 
     public static boolean getBoolean(Properties props, String key, boolean defaultValue) {

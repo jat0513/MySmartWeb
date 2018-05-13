@@ -5,7 +5,7 @@
 </head>
 <body>
 <H2>
-    当前时间：${currentTime}
+    Hello,Smart MVC
 </H2>
 </body>
 </html>
