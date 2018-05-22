@@ -1,5 +1,6 @@
 package com.smartmvc.service;
 
+import com.smartmvc.annotation.Service;
 import com.smartmvc.helper.DatabaseHelper;
 import com.smartmvc.model.Customer;
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import java.util.Map;
 /**
  * 提供客户数据服务
  */
+@Service
 public class CustomerService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomerService.class);
@@ -32,7 +34,7 @@ public class CustomerService {
      * @param id
      * @return
      */
-    public Customer getCustomer(Long id) {
+    public Customer getCustomer(Integer id) {
         String sql = "SELECT * FROM customer WHERE id=?";
         return DatabaseHelper.queryEntity(Customer.class, sql, id);
     }
@@ -67,6 +69,15 @@ public class CustomerService {
      */
     public boolean deleteCustomer(long id) {
         return DatabaseHelper.deleteEntity(Customer.class, id);
+    }
+
+    public Customer getTestCustomer() {
+        Customer customer = new Customer();
+        customer.setId(12306L);
+        customer.setName("test");
+        customer.setEmail("test@smartmvc.com");
+        customer.setTelephone("13888888888");
+        return customer;
     }
 
 

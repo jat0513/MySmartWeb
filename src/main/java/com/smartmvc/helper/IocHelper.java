@@ -4,11 +4,18 @@ import com.smartmvc.annotation.Inject;
 import com.smartmvc.util.ArrayUtil;
 import com.smartmvc.util.CollectionUtil;
 import com.smartmvc.util.ReflectionUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.util.Map;
 
+/**
+ * 依赖注入助手类
+ */
 public class IocHelper {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(IocHelper.class);
 
     static {
         // 获取所有的 Bean 类与 Bean 实例之间的映射关系(简称 Bean Map)
@@ -32,6 +39,8 @@ public class IocHelper {
                             if (beanFieldInstance != null) {
                                 // 通过反射初始化 BeanField 的值
                                 ReflectionUtil.setField(beanInstance, beanField, beanFieldInstance);
+
+                                LOGGER.info("setFiled:beanInstance={},beanField={},beanFieldInstance={}", beanInstance.toString(), beanField.getName(), beanFieldInstance.toString());
                             }
                         }
                     }
