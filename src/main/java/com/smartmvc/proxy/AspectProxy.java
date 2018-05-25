@@ -23,6 +23,9 @@ public class AspectProxy implements Proxy {
         try {
             if (intercept(cls, method, params)) {
                 before(cls, method, params);
+                // 递归调用
+                result = proxyChain.doProxyChain();
+                after(cls, method, params);
             } else {
                 result = proxyChain.doProxyChain();
             }
@@ -41,6 +44,15 @@ public class AspectProxy implements Proxy {
 
     }
 
+    /**
+     * 匹配拦截方法
+     *
+     * @param cls
+     * @param method
+     * @param params
+     * @return
+     * @throws Throwable
+     */
     public boolean intercept(Class<?> cls, Method method, Object[] params) throws Throwable {
         return true;
     }

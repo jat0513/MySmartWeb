@@ -15,6 +15,7 @@ public class HelpLoader {
                 AopHelper.class,
                 // 3:依赖注入
                 IocHelper.class,
+                // 4:初始化控制器
                 ControllerHelper.class
         };
 

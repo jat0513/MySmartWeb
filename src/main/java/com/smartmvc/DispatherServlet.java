@@ -40,6 +40,7 @@ public class DispatherServlet extends HttpServlet {
         // 注册处理 JSP 的 Servlet
         ServletRegistration jspServlet = servletContext.getServletRegistration("jsp");
         jspServlet.addMapping(ConfigHelper.getAppJspPath() + "*");
+        // 注册首页 因为 /* 的匹配优先级高于 *.jsp,不配置就会匹配不到
         jspServlet.addMapping("/index.jsp");
         // 注册处理静态资源的默认 Servlet
         ServletRegistration defaultServlet = servletContext.getServletRegistration("default");

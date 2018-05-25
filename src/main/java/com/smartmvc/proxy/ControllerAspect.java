@@ -6,6 +6,9 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
 
+/**
+ * 拦截 Controller 所有方法
+ */
 @Aspect(Controller.class)
 public class ControllerAspect extends AspectProxy {
 
@@ -16,8 +19,7 @@ public class ControllerAspect extends AspectProxy {
     @Override
     public void before(Class<?> cls, Method method, Object[] params) throws Throwable {
         LOGGER.debug("---------- begin ----------");
-        LOGGER.debug(String.format("class: %s", cls.getName()));
-        LOGGER.debug(String.format("method: %s", method.getName()));
+        LOGGER.debug(String.format("class.method:%s.%s", cls.getName(), method.getName()));
         begin = System.currentTimeMillis();
     }
 

@@ -26,6 +26,8 @@ public final class AopHelper {
                 List<Proxy> proxyList = targetEntry.getValue();
                 Object proxy = ProxyManager.createProxy(targetClass, proxyList);
                 BeanHelper.setBean(targetClass, proxy);
+
+                LOGGER.info("set proxy bean:targetClass={},proxyClass={},proxyObject={}", targetClass.getName(), proxy.getClass(), proxy);
             }
         } catch (Exception e) {
             LOGGER.error("init aop helper failure", e);
@@ -55,6 +57,8 @@ public final class AopHelper {
      * @throws Exception
      */
     private static Map<Class<?>, Set<Class<?>>> createProxyMap() throws Exception {
+        LOGGER.info("createProxyMap start:");
+
         Map<Class<?>, Set<Class<?>>> proxyMap = new HashMap<Class<?>, Set<Class<?>>>();
         Set<Class<?>> proxyClassSet = ClassHelper.getClassSetBySuper(AspectProxy.class);
         for (Class<?> proxyClass : proxyClassSet) {
@@ -64,6 +68,8 @@ public final class AopHelper {
                 proxyMap.put(proxyClass, targetClassSet);
             }
         }
+
+        LOGGER.info("createProxyMap end:");
         return proxyMap;
     }
 
@@ -75,6 +81,8 @@ public final class AopHelper {
      * @throws Exception
      */
     private static Map<Class<?>, List<Proxy>> createTargetMap(Map<Class<?>, Set<Class<?>>> proxyMap) throws Exception {
+        LOGGER.info("createTargetMap start:");
+
         Map<Class<?>, List<Proxy>> targetMap = new HashMap<Class<?>, List<Proxy>>();
         for (Map.Entry<Class<?>, Set<Class<?>>> proxyEntry : proxyMap.entrySet()) {
             Class<?> proxyClass = proxyEntry.getKey();
@@ -90,6 +98,8 @@ public final class AopHelper {
                 }
             }
         }
+
+        LOGGER.info("createTargetMap end:");
         return targetMap;
     }
 

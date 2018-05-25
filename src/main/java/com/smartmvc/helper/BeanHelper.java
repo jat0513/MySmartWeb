@@ -26,7 +26,7 @@ public class BeanHelper {
             Object obj = ReflectionUtil.newInstance(beanClass);
             BEAN_MAP.put(beanClass, obj);
 
-            LOGGER.info("newInstance:{}", beanClass.getName());
+            LOGGER.info("newInstance:class={},instance={}", beanClass.getName(), obj);
         }
     }
 

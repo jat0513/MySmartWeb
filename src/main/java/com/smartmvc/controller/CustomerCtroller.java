@@ -7,10 +7,16 @@ import com.smartmvc.bean.Data;
 import com.smartmvc.bean.Param;
 import com.smartmvc.bean.View;
 import com.smartmvc.model.Customer;
+import com.smartmvc.proxy.ControllerAspect;
 import com.smartmvc.service.CustomerService;
+import com.smartmvc.util.JsonUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 public class CustomerCtroller {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ControllerAspect.class);
 
     @Inject
     private CustomerService customerService;
@@ -31,7 +37,9 @@ public class CustomerCtroller {
     @Action(value = "get:/getCustomerJson")
     public Data getCustomerJson(Param param) {
         Customer customer = customerService.getCustomer(param.getInt("id"));
-        return new Data(customer);
+        Data data = new Data(customer);
+        LOGGER.info(String.format("data=%s", JsonUtil.toJson(data)));
+        return data;
     }
 
 

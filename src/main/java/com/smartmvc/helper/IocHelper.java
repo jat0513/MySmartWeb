@@ -40,7 +40,7 @@ public class IocHelper {
                                 // 通过反射初始化 BeanField 的值
                                 ReflectionUtil.setField(beanInstance, beanField, beanFieldInstance);
 
-                                LOGGER.info("setFiled:beanInstance={},beanField={},beanFieldInstance={}", beanInstance.toString(), beanField.getName(), beanFieldInstance.toString());
+                                LOGGER.info("set field:beanInstance={},beanField={},beanFieldInstance={}", beanInstance.toString(), beanField.getName(), beanFieldInstance.toString());
                             }
                         }
                     }
