@@ -1,9 +1,7 @@
 package com.smartmvc.helper;
 
-import com.smartmvc.proxy.Aspect;
-import com.smartmvc.proxy.AspectProxy;
-import com.smartmvc.proxy.Proxy;
-import com.smartmvc.proxy.ProxyManager;
+import com.smartmvc.annotation.Service;
+import com.smartmvc.proxy.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -60,6 +58,22 @@ public final class AopHelper {
         LOGGER.info("createProxyMap start:");
 
         Map<Class<?>, Set<Class<?>>> proxyMap = new HashMap<Class<?>, Set<Class<?>>>();
+        addAspectProxy(proxyMap);
+        addTransactionProxy(proxyMap);
+
+        LOGGER.info("createProxyMap end:");
+        return proxyMap;
+    }
+
+    /**
+     * 获取 Aspect 代理类及其目标类集合之间的映射关系
+     *
+     * @return
+     * @throws Exception
+     */
+    private static Map<Class<?>, Set<Class<?>>> addAspectProxy(Map<Class<?>, Set<Class<?>>> proxyMap) throws Exception {
+        LOGGER.info("addAspectProxy start:");
+
         Set<Class<?>> proxyClassSet = ClassHelper.getClassSetBySuper(AspectProxy.class);
         for (Class<?> proxyClass : proxyClassSet) {
             if (proxyClass.isAnnotationPresent(Aspect.class)) {
@@ -69,7 +83,23 @@ public final class AopHelper {
             }
         }
 
-        LOGGER.info("createProxyMap end:");
+        LOGGER.info("addAspectProxy end:");
+        return proxyMap;
+    }
+
+    /**
+     * 获取 Aspect 代理类及其目标类集合之间的映射关系
+     *
+     * @return
+     * @throws Exception
+     */
+    private static Map<Class<?>, Set<Class<?>>> addTransactionProxy(Map<Class<?>, Set<Class<?>>> proxyMap) throws Exception {
+        LOGGER.info("addTransactionProxy start:");
+
+        Set<Class<?>> serviceClassSet = ClassHelper.getClassSetByAnnotation(Service.class);
+        proxyMap.put(TransactionProxy.class, serviceClassSet);
+
+        LOGGER.info("addTransactionProxy end:");
         return proxyMap;
     }
 

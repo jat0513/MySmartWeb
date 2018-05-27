@@ -1,6 +1,7 @@
 package com.smartmvc.service;
 
 import com.smartmvc.annotation.Service;
+import com.smartmvc.annotation.Transaction;
 import com.smartmvc.helper.DatabaseHelper;
 import com.smartmvc.model.Customer;
 import org.slf4j.Logger;
@@ -34,6 +35,7 @@ public class CustomerService {
      * @param id
      * @return
      */
+    @Transaction
     public Customer getCustomer(Integer id) {
         String sql = "SELECT * FROM customer WHERE id=?";
         return DatabaseHelper.queryEntity(Customer.class, sql, id);
@@ -45,6 +47,7 @@ public class CustomerService {
      * @param fieldMap
      * @return
      */
+    @Transaction
     public boolean createCustomer(Map<String,Object> fieldMap) {
         return DatabaseHelper.insertEntity(Customer.class, fieldMap);
     }
@@ -57,6 +60,7 @@ public class CustomerService {
      * @param fieldMap
      * @return
      */
+    @Transaction
     public boolean updateCustomer(Long id, Map<String,Object> fieldMap) {
         return DatabaseHelper.updateEntity(Customer.class, id, fieldMap);
     }
@@ -67,6 +71,7 @@ public class CustomerService {
      * @param id
      * @return
      */
+    @Transaction
     public boolean deleteCustomer(long id) {
         return DatabaseHelper.deleteEntity(Customer.class, id);
     }
