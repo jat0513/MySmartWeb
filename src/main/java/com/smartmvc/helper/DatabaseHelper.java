@@ -49,12 +49,15 @@ public class DatabaseHelper {
         if (conn == null) {
             try {
                 conn = DATA_SOURCE.getConnection();
+                LOGGER.info("创建 conn={}", conn);
             } catch (SQLException e) {
                 LOGGER.error("getConnection failure", e);
                 throw new RuntimeException(e);
             } finally {
                 CONNECTION_HOLDER.set(conn);
             }
+        } else {
+            LOGGER.info("获取 conn={}", conn);
         }
 
         return conn;
@@ -127,8 +130,6 @@ public class DatabaseHelper {
         } catch (SQLException e) {
             LOGGER.error("excute update failure", e);
             throw new RuntimeException(e);
-        } finally {
-            closeConnection();
         }
         return rows;
     }
